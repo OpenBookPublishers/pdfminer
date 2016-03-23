@@ -129,13 +129,12 @@ def dumpoutline(outfp, fname, objids, pagenos, password='',
     try:
         outlines = doc.get_outlines()
         outfp.write('<outlines>\n')
-        for (level,title,dest,a,se) in outlines:
+        for (level,title,dest,action,se) in outlines:
             pageno = None
             if dest:
                 dest = resolve_dest(dest)
                 pageno = pages[dest[0].objid]
-            elif a:
-                action = a.resolve()
+            elif action:
                 if isinstance(action, dict):
                     subtype = action.get('S')
                     if subtype and repr(subtype) == '/GoTo' and action.get('D'):
